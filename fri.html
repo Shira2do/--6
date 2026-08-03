@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>情報コース 金曜日 時間割（全コマ入力済み）</title>
+<style>
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    margin: 20px;
+}
+.header-container {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.header-title {
+    font-size: 26px;
+    margin: 0;
+    letter-spacing: 1px;
+}
+.header-sub {
+    font-size: 16px;
+    color: #666;
+    margin-top: 5px;
+}
+table {
+    border-collapse: collapse;
+    margin: 0 auto 40px auto;
+    width: 1200px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+th, td {
+    border: 2px solid #333;
+    text-align: center;
+    vertical-align: middle;
+}
+/* 左端列 */
+.left {
+    width: 140px;
+    font-weight: bold;
+    background-color: #e9ecef;
+}
+.day-label {
+    background-color: #4a6fa5;
+    color: #fff;
+    font-size: 18px;
+}
+/* 1〜5限 */
+.period {
+    height: 45px;
+    font-size: 16px;
+    background-color: #e9ecef;
+}
+.time-label {
+    display: block;
+    font-size: 12px;
+    color: #555;
+    font-weight: normal;
+    margin-top: 2px;
+}
+/* 3Q・4Q */
+.quarter {
+    width: 100px;
+    height: 35px;
+    background-color: #f8f9fa;
+}
+/* クォーター入力セル */
+.qcell {
+    height: 120px;
+    padding: 0;
+}
+.qcell textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    box-sizing: border-box;
+    font-size: 13px;
+    padding: 8px;
+    font-family: inherit;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* セメスター入力セル */
+.scell {
+    height: 160px;
+    padding: 0;
+}
+.scell textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    box-sizing: border-box;
+    font-size: 13px;
+    padding: 8px;
+    font-family: inherit;
+    text-align: center;
+    line-height: 1.4;
+}
+
+textarea:focus {
+    background-color: #eef6ff;
+}
+
+.day-menu{
+    display:flex;
+    gap:15px;
+    margin-bottom:30px;
+}
+
+.day-menu a{
+    text-decoration:none;
+    color:white;
+    background-color:#4a6fa5;
+    padding:10px 20px;
+    border-radius:10px;
+}
+
+.day-menu a:hover{
+    opacity:0.8;
+}
+
+/* 絞り込みボタンのエリア */
+.filter-container{
+    width: 1200px;
+    margin: -20px auto 20px auto;
+    text-align: left;
+}
+
+/* ボタンのデザイン */
+#requiredBtn{
+    padding:10px 25px;
+    font-size:16px;
+    border:none;
+    border-radius:8px;
+    background-color:#ffef40;
+    color:rgb(0, 0, 0);
+    cursor:pointer;
+}
+
+#requiredBtn:hover{
+    opacity:0.9;
+}
+#universityBtn{
+    padding:10px 25px;
+    font-size:16px;
+    border:none;
+    border-radius:8px;
+    background-color:#40fff9;
+    color:rgb(0, 0, 0);
+    cursor:pointer;
+}
+
+#requiredBtn:hover{
+    opacity:0.9;
+}
+#establishmentBtn{
+    padding:10px 25px;
+    font-size:16px;
+    border:none;
+    border-radius:8px;
+    background-color:#43ff40;
+    color:rgb(0, 0, 0);
+    cursor:pointer;
+}
+
+#requiredBtn:hover{
+    opacity:0.9;
+}
+
+/* 必修科目をハイライト */
+.highlight-req textarea{
+    background-color:#ffef40;
+    font-weight:bold;
+}
+.highlight-uni textarea{
+    background-color:#40fff9;
+    font-weight:bold;
+}
+.highlight-est textarea{
+    background-color:#43ff40;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+    <nav class="day-menu">
+    <a href="mon.html">月曜日</a>
+    <a href="tues.html">火曜日</a>
+    <a href="wednes.html">水曜日</a>
+    <a href="thurs.html">木曜日</a>
+    <a href="fri.html">金曜日</a>
+</nav>
+
+<div class="header-container">
+    <h1 class="header-title">情報コース 時間割（金曜日）</h1>
+    <div class="header-sub">金曜日の全時限・次第スケジュール</div>
+</div>
+
+<table>
+<!-- 1行目：時限＋時間帯 -->
+<tr>
+    <th class="left day-label">金曜日</th>
+    <th colspan="2" class="period">1限<span class="time-label">8:50 - 10:20</span></th>
+    <th colspan="2" class="period">2限<span class="time-label">10:30 - 12:00</span></th>
+    <th colspan="2" class="period">3限<span class="time-label">13:00 - 14:30</span></th>
+    <th colspan="2" class="period">4限<span class="time-label">14:40 - 16:10</span></th>
+    <th colspan="2" class="period">5限<span class="time-label">16:20 - 17:50</span></th>
+</tr>
+<!-- 2行目：クォーター区分 -->
+<tr>
+    <th rowspan="2" class="left">クォーター</th>
+    <th class="quarter">3Q</th>
+    <th class="quarter">4Q</th>
+    <th class="quarter">3Q</th>
+    <th class="quarter">4Q</th>
+    <th class="quarter">3Q</th>
+    <th class="quarter">4Q</th>
+    <th class="quarter">3Q</th>
+    <th class="quarter">4Q</th>
+    <th class="quarter">3Q</th>
+    <th class="quarter">4Q</th>
+</tr>
+<!-- 3行目：クォーター入力欄（全コマ記入済み） -->
+<tr>
+    <td class="qcell required university"><textarea>情報数学I&#10;数理 教授&#10;101教室</textarea></td>
+    <td class="qcell university establishment"><textarea>応用数学II&#10;数理 教授&#10;101教室</textarea></td>
+    <td class="qcell establishment"><textarea>アルゴリズム入門&#10;情報 太郎&#10;202教室</textarea></td>
+    <td class="qcell"><textarea>言語処理理論&#10;情報 太郎&#10;202教室</textarea></td>
+    <td class="qcell required"><textarea>データベース論&#10;DB 准教授&#10;201教室</textarea></td>
+    <td class="qcell required"><textarea>ソフトウェア工学&#10;ソフト 教授&#10;201教室</textarea></td>
+    <td class="qcell establishment"><textarea>コンピュータネットワーク&#10;通信 教授&#10;303教室</textarea></td>
+    <td class="qcell required"><textarea>情報セキュリティ&#10;安全 講師&#10;303教室</textarea></td>
+    <td class="qcell establishment"><textarea>コンピュータグラフィックス&#10;メディア 講師&#10;PC室B</textarea></td>
+    <td class="qcell university"><textarea>画像処理・パターン認識&#10;メディア 講師&#10;PC室B</textarea></td>
+</tr>
+<!-- 4行目：セメスター入力欄（全コマ記入済み） -->
+<tr>
+    <th class="left">セメスター</th>
+    <td colspan="2" class="scell required"><textarea>Webプログラミング演習&#10;システム 准教授&#10;PC室A</textarea></td>
+    <td colspan="2" class="scell university establishment"><textarea>確率・統計学概論&#10;統計 講師&#10;105教室</textarea></td>
+    <td colspan="2" class="scell establishment"><textarea>情報コース専門実験・演習I&#10;（3限〜4限 連続コマ）&#10;各担当教員 / 情報実験室</textarea></td>
+    <td colspan="2" class="scell establishment"><textarea>情報コース専門実験・演習II&#10;（3限〜4限 連続コマ）&#10;各担当教員 / 情報実験室</textarea></td>
+    <td colspan="2" class="scell"><textarea>卒業研究・ゼミナール&#10;各指導教員&#10;各研究室</textarea></td>
+</tr>
+</table>
+<div class="filter-container">
+    <button id="requiredBtn">必修</button>
+    <button id="universityBtn">全学共通</button>
+    <button id="establishmentBtn">学部開設</button>
+</div>
+<script>
+const requiredBtn = document.getElementById("requiredBtn");
+const universityBtn = document.getElementById("universityBtn");
+
+requiredBtn.onclick = function(){
+    document.querySelectorAll(".required").forEach(subject=>{
+        subject.classList.toggle("highlight-req");
+    });
+}
+
+universityBtn.onclick = function(){
+    document.querySelectorAll(".university").forEach(subject=>{
+        subject.classList.toggle("highlight-uni");
+    });
+}
+
+establishmentBtn.onclick = function(){
+    document.querySelectorAll(".establishment").forEach(subject=>{
+        subject.classList.toggle("highlight-est");
+    });
+}
+</script>
+</body>
+</html>
